@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+  	xmlns:security="http://www.springframework.org/schema/security"
+  	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       	http://www.springframework.org/schema/beans 
+     		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+     	http://www.springframework.org/schema/context 
+     		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx 
+        	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<tx:annotation-driven />
+	<context:annotation-config />
+	
+	<bean id="configDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:derby:/home/rtalampas/Database/CONFIG.db;create=true;upgrade=true</value>
+		</property>
+		<property name="username">
+			<value>app</value>
+		</property>
+		<property name="password">
+			<value>app</value>
+		</property>
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="configDataSource" />
+		<property name="persistenceUnitName" value="derby" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- prop key="hibernate.hbm2ddl.auto">update</prop-->
+			</props>
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/> 
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	
+	<bean id="screenController"			class="rt.fx.base.db.ScreenControllerDaoImpl"/>
+	<bean id="screenNavigator"			class="rt.fx.base.db.ScreenNavigatorDaoImpl"/>
+	
+	<bean id="daoMapping" class="java.util.HashMap">
+		<constructor-arg index="0" type="java.util.Map">
+			<map key-type="java.lang.String" value-type="rt.fx.base.db.ADao">
+					<entry key="SCREEN_CONTROLLER"				value-ref="screenController"/>
+					<entry key="SCREEN_NAVIGATOR"				value-ref="screenNavigator"/>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+
+</beans>

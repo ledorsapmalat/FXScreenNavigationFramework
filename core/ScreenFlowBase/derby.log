@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Sep 22 09:13:11 SGT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014f-f29c-8a34-000002d33920 
+on database directory /home/rtalampas/Database/CONFIG.db with class loader sun.misc.Launcher$AppClassLoader@4e0e2f2a 
+Loaded from file:/home/rtalampas/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=/home/rtalampas/devSource/FXScreenFlowFramework/core/ScreenFlowBase
+os.name=Linux
+os.arch=amd64
+os.version=3.16.0-48-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

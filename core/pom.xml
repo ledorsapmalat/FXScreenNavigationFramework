@@ -1,9 +1,159 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>rt.fx</groupId>
-  <artifactId>ScreenFlowFramework</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>ScreenFlowFramework</name>
-  <description>This is the main maven project</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>rt.fx</groupId>
+	<artifactId>ScreenFlowFramework</artifactId>
+	<version>0.0.1-Beta</version>
+	<packaging>pom</packaging>
+	<name>ScreenFlowFramework</name>
+	<description>This is the main maven project</description>
+
+	<properties>
+		<source.version>1.8</source.version>
+		<target.version>1.8</target.version>
+
+		<final.name>ScreenFlowFramework</final.name>
+
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring.jpa.version>1.8.1.RELEASE</spring.jpa.version>
+		<junit.version>4.12</junit.version>
+		<log4j.version>2.3</log4j.version>
+		<plantuml.version>8027</plantuml.version>
+		<derby.version>10.11.1.1</derby.version>
+		<hibernate.entity.version>4.3.10.Final</hibernate.entity.version>
+		<persistence.api.version>1.0.2</persistence.api.version>
+		<powermock.version>1.6.2</powermock.version>
+
+		<reflections.version>0.9.5</reflections.version>
+		<google.collection.version>1.0</google.collection.version>
+
+		<slf4j.version>1.7.12</slf4j.version>
+
+		<maven.eclipse.plugin.version>2.9</maven.eclipse.plugin.version>
+		<maven.assembly.plugin.version>2.5.4</maven.assembly.plugin.version>
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.enforcer.plugin.version>1.4</maven.enforcer.plugin.version>
+		<maven.jar.plugin.version>2.3.1</maven.jar.plugin.version>
+		<maven.resource.plugin.version>2.7</maven.resource.plugin.version>
+		<maven.replacer.plugin.version>1.5.3</maven.replacer.plugin.version>
+		<maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
+		<maven.reports.plugin.version>2.5.1</maven.reports.plugin.version>
+		<maven.site.plugin.version>3.3</maven.site.plugin.version>
+		<maven.cobertura.plugin.version>2.7</maven.cobertura.plugin.version>
+		<maven.javadoc.plugin.version>2.9</maven.javadoc.plugin.version>
+		<maven.plantuml.plugin.version>7941</maven.plantuml.plugin.version>
+
+		<jackrabbit.webdav.version>2.10.1</jackrabbit.webdav.version>
+	</properties>
+	<modules>
+		<module>ScreenFlowBase</module>
+		<module>ScreenFlowSample</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.reflections</groupId>
+				<artifactId>reflections</artifactId>
+				<version>${reflections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.collections</groupId>
+				<artifactId>google-collections</artifactId>
+				<version>${google.collection.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>rt.fx.base</groupId>
+				<artifactId>ScreenFlowBase</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derbyclient</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.entity.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${source.version}</source>
+					<target>${target.version}</target>
+					<verbose>false</verbose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.resource.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/target/deployment</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources/</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>reflections-repo</id>
+			<name>Reflections Maven2 Repository</name>
+			<url>http://reflections.googlecode.com/svn/repo</url>
+		</repository>
+	</repositories>
+
 </project>
