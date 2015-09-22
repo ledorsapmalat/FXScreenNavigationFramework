@@ -16,6 +16,8 @@ This basically assumes that each Screen has its own FXML file and each having it
 
 The framework is not limited to Buttons though. Every navigation object such as HyperLink or DropDown can be configured as such. 
 
+This framework was designed for a Desktop Application. If in case for web, I believe there are a bunch of Web UI Framework out there suitable for the same task. But if this is useful in someone's case, I am glad that I can help.
+
 Technologies / Components
 -------------------------
 1. Java Annotations (Java 8)
@@ -35,8 +37,8 @@ Resources
 2. The project also used some concepts of Spring-Reflection
 	- http://techo-ecco.com/blog/spring-custom-annotations/
 		
-The Code
----------
+The Code and the Default Navigation
+-----------------------------------
 The `ScreenFlowSample` Maven Module contains the basic Java FX Screen / Controller pairing that uses the RT FX's Screen Navigation Framework. 
 
 It is compose of 3 FXML files:
@@ -49,13 +51,22 @@ With their corresponding FX Controllers:
 - NextScreen01Controller.java
 - NextScreen02Controller.java
 
+A typical code for an FX Controller will be like the following below:
 
 ```java
+/**
+ * This '@Screen' line describes that this FX Controller is tied to a Screen (FXML) called 'main'
+ * With a default FXML File /rt/fx/sample/mainScreen.fxml
+ */
 @Screen(id="main", fileContext="/rt/fx/sample/mainScreen.fxml")
 public class MainScreenController extends AController
 {
 
 	@FXML
+	/**
+	 * This '@Navigation' line describes that this FX Control Button is tied to a Navigation called 'btnMain'
+	 * With a default target next screen to be 'screen02'
+	 */
 	@Navigation(id="btnMain", defaultTarget = "screen02")
 	Button btnMain;
 
@@ -63,15 +74,51 @@ public class MainScreenController extends AController
 	private void validate(ActionEvent event){
 		Button btn = (Button)event.getSource();
 		System.out.println(btn.getId());
+		/**
+		 * Using Angela's Screen Framework, setting the next screen would be easy as its controlled 
+		 * by the ScreenLoader Navigation Framework. Even if you have more than 1 Button,
+		 * as long as you configured the Navigation Object using the Framework's annotation, 
+		 * only 1 line of code is enough
+		 */
 		myController.setScreen(ScreenLoader.getNavigation("main", btn.getId()));
 	}
 
 }
 
+```
+Without the ScreenLoader (RT FX's Screen Navigation Framework), the transition screen code would look like this
 
+```java 
+private void validate(ActionEvent event) {
+	Button btn = (Button) event.getSource();
+	switch (btn.getId()) {
+	case "btnMain":
+		myController.setScreen("screen02");
+		break;
+	// if you have other buttons to declare
+	// you need to add the some piece of code below
+	case "btnCancel":
+		myController.setScreen("cancel");
+		break;
+	case "btnBack":
+		myController.setScreen("back");
+		break;
+	default:
+		break;
+	}
+}
+```
 
+Overriding the Default Navigation
+---------------------------------
+There are some instances that the default next screen wont be the next screen the customer (operator of the app) wants. E.g. Instead of going to the default Item Selection Screen first, the customer wants to have another screen before that, Season Screen [Summer, Winter, Fall, Autumn]. Instead of modifying the Screen Controller that redirect to Item Selection Screen, overrite the Controller's Navigation defaultTarget through a series SQL Scripts.
 
-
+```sql
+'This lines of SQL Script will Override the defaultTarget screen id of btnMain navigation object. The default
+'is screen02. Now this script will make it as screen01
+insert into "APP"."SCREEN_CONTROLLER" ("ID", "FILE_CONTEXT") values('main', '/rt/fx/sample/mainScreen.fxml')
+insert into "APP"."SCREEN_NAVIGATOR" ("ID", "OWNER_ID", "TARGET_ID") values('btnMain', 'main', 'screen01')
+```
 
 
 
