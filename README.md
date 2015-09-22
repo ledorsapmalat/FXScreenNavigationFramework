@@ -34,3 +34,50 @@ Resources
 	- https://github.com/acaicedo/JFX-MultiScreen
 2. The project also used some concepts of Spring-Reflection
 	- http://techo-ecco.com/blog/spring-custom-annotations/
+		
+The Code
+---------
+The `ScreenFlowSample` Maven Module contains the basic Java FX Screen / Controller pairing that uses the RT FX's Screen Navigation Framework. 
+
+It is compose of 3 FXML files:
+- mainScreen.fxml
+- nextScreen01.fxml
+- nextScreen02.fxml
+
+With their corresponding FX Controllers:
+- MainScreenController.java
+- NextScreen01Controller.java
+- NextScreen02Controller.java
+
+
+```java
+@Screen(id="main", fileContext="/rt/fx/sample/mainScreen.fxml")
+public class MainScreenController extends AController
+{
+
+	@FXML
+	@Navigation(id="btnMain", defaultTarget = "screen02")
+	Button btnMain;
+
+	@FXML
+	private void validate(ActionEvent event){
+		Button btn = (Button)event.getSource();
+		System.out.println(btn.getId());
+		myController.setScreen(ScreenLoader.getNavigation("main", btn.getId()));
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
