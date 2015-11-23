@@ -120,10 +120,15 @@ insert into "APP"."SCREEN_CONTROLLER" ("ID", "FILE_CONTEXT") values('main', '/rt
 insert into "APP"."SCREEN_NAVIGATOR" ("ID", "OWNER_ID", "TARGET_ID") values('btnMain', 'main', 'screen01')
 ```
 
+The Object Loader
+---------------------------------
+The Singleton Class ScreenLoader is brain of the framework. Its purpose is simple: Scan your packages with the framework's annotations and load and in case the default navigation is overriden by the DAO Navigation, update and load them in Memory to be ACCESS later.
 
-
-
-
+The line of code should be called on the very first load of your application.
+```java 
+   ScreenLoader.getScreenMapping("your.package.com");
+```
+This will override the framework's package loading. 
 
 
 
