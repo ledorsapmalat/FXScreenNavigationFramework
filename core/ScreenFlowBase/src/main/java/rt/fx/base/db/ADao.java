@@ -80,6 +80,8 @@ public abstract class ADao<T> implements IDao<T> {
 	
 	public T getByPrimary(Object value){
 		System.out.println(PRIMARY_COLUMN + " " + value);
+		if (get(PRIMARY_COLUMN,value).isEmpty())
+			return null;
 		return get(PRIMARY_COLUMN,value).get(0);
 	}
 	
