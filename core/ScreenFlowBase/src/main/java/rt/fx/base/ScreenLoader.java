@@ -121,13 +121,17 @@ public class ScreenLoader {
 			dbMap = CConfigLoader.getDao();
 			daoNavigator = (IDao<ScreenNavigatorEntity>) dbMap.get("SCREEN_NAVIGATOR");
 			
-			for (String s: mapNav.keySet()){
-				Map<String, String> nav = mapNav.get(s);
-				for (String k: nav.keySet()){
-					ScreenNavigatorEntity entity = daoNavigator.getByPrimary(k);
-					nav.put(k,entity.getTarget().getId());
+			if (daoNavigator!=null){
+				for (String s: mapNav.keySet()){
+					Map<String, String> nav = mapNav.get(s);
+					for (String k: nav.keySet()){
+						System.out.println(k);
+						ScreenNavigatorEntity entity = daoNavigator.getByPrimary(k);
+						if (entity!=null)
+							nav.put(k,entity.getTarget().getId());
+					}
+					mapNav.put(s, nav);
 				}
-				mapNav.put(s, nav);
 			}
 			
 			
