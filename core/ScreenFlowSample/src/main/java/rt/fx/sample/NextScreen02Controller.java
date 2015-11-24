@@ -30,8 +30,13 @@ public class NextScreen02Controller extends AController{
 	@FXML
 	private void validate(ActionEvent event){
 		Button btn = (Button)event.getSource();
-		System.out.println(btn.getId());
-		myController.setScreen(ScreenLoader.getNavigation("screen02", btn.getId()));
+		LOGGER.debug(btn.getId());
+		try {
+			myController.setScreen(new ScreenLoader().getNavigation("screen02", btn.getId()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

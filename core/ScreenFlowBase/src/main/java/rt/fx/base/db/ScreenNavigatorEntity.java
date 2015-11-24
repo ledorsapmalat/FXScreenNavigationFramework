@@ -16,7 +16,7 @@ import javax.persistence.Table;
  */
 
 @Entity(name="ScreenNavigator")
-@Table(name="APP.SCREEN_NAVIGATOR")
+@Table(name="SCREEN_NAVIGATOR")
 public class ScreenNavigatorEntity {
 
 	@Id

@@ -28,6 +28,9 @@ package rt.fx.sample;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -49,6 +52,8 @@ import screensframework.ScreensController;
  *
  */
 public class FXScreenController extends ScreensController {
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(FXScreenController.class);
 	
 	private static int MAIN_DURATION=100; 
 	private static int FADE_IN_DURATION=50;
@@ -107,7 +112,7 @@ public class FXScreenController extends ScreensController {
             return true;
         } catch (Exception e) {
         	e.printStackTrace();
-            System.out.println(e.getMessage());
+        	LOGGER.error(e.getMessage());
             return false;
         }
     }
@@ -150,7 +155,7 @@ public class FXScreenController extends ScreensController {
             getController(name).onShow();
             return true;
         } else {
-            System.out.println("Screen hasn't been loaded!!! \n");
+        	LOGGER.warn("Screen hasn't been loaded!!! \n");
             return false;
         }
     }

@@ -25,6 +25,9 @@
  */
 package rt.fx.sample;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.animation.PauseTransition;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
@@ -43,6 +46,7 @@ import screensframework.ScreensController;
  */
 public abstract class AController implements Initializable, ControlledScreen{
 
+	protected Logger LOGGER = LoggerFactory.getLogger(this.getClass().getName());
 	protected ScreensController myController;
 	protected Scene scene;
 	

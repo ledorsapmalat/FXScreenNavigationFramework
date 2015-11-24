@@ -26,65 +26,27 @@
  */
 package rt.fx.base.config;
 
-import java.util.Map;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import rt.fx.base.db.IDao;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author rodel.talampas
  *
  */
-public class CConfigLoader {
+public class CConfigLoader extends AConfigLoader{
 
-	private static CConfigLoader singleton   	= null;
-	private static Object singleton_mutex 			= new Object();
+	private static Logger LOGGER = LoggerFactory.getLogger(CConfigLoader.class);
 	
-	private static ApplicationContext beanFactory = null;
-	private static boolean loaded = false;
-	
-	private static CConfigLoader getAppLoader() {
+	public CConfigLoader(){
 		if (singleton == null) {
-			System.out.println("Retrieving Config Loader for the first time...");
+			LOGGER.debug("Retrieving Config Loader for the first time...");
 			synchronized (singleton_mutex) {
 				if (singleton == null) {
-					singleton = new CConfigLoader();
-					System.out.println("Config Loader has been created...");
+					singleton = this;
+					LOGGER.debug("Config Loader has been created...");
 				}
 			}
 		}
-		return singleton;
+		//LOGGER.debug(singleton);
 	}
-
-	/**
-	 * You can make this a really configurable config by using FileSystemApplicationXMLContext
-	 */
-	private void initSettings() {
-		if (beanFactory == null) {
-			beanFactory = new ClassPathXmlApplicationContext("config.xml");
-			System.out.println("BEAN FACTORY: " + beanFactory);
-		}
-	}
-	
-	private static void simpleInit() throws Exception{
-		if (!loaded){
-			initialize();
-		}
-	}
-	
-	public static void initialize() {
-        getAppLoader().initSettings();
-        loaded = true;
-    }
-	
-	@SuppressWarnings("unchecked")
-	public static Map<String, IDao<?>> getDao() throws Exception{
-    	simpleInit();
-    	System.out.println((Map<String, IDao<?>>)beanFactory.getBean("daoMapping"));
-    	return (Map<String, IDao<?>>)beanFactory.getBean("daoMapping");
-    }
-	
 }

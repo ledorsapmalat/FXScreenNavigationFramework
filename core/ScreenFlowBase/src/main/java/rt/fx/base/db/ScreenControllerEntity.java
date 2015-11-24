@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity(name="ScreenController")
-@Table(name="APP.SCREEN_CONTROLLER")
+@Table(name="SCREEN_CONTROLLER")
 public class ScreenControllerEntity {
 
 	@Id

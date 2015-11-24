@@ -25,6 +25,9 @@ package rt.fx.sample;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,6 +48,7 @@ import rt.fx.base.interfaces.Screen;
 @Screen(id="main", fileContext="/rt/fx/sample/mainScreen.fxml")
 public class MainScreenController extends AController{
 
+	
 	@FXML
 	/**
 	 * This '@Navigation' line describes that this FX Control Button is tied to a Navigation called 'btnMain'
@@ -61,14 +65,19 @@ public class MainScreenController extends AController{
 	@FXML
 	private void validate(ActionEvent event){
 		Button btn = (Button)event.getSource();
-		System.out.println(btn.getId());
+		LOGGER.debug(btn.getId());
 		/**
 		 * Using Angela's Screen Framework, setting the next screen would be easy as its controlled 
 		 * by the ScreenLoader Navigation Framework. Even if you have more than 1 Button,
 		 * as long as you configured the Navigation Object using the Framework's annotation, 
 		 * only 1 line of code is enough
 		 */
-		myController.setScreen(ScreenLoader.getNavigation("main", btn.getId()));
+		try {
+			myController.setScreen(new ScreenLoader().getNavigation("main", btn.getId()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

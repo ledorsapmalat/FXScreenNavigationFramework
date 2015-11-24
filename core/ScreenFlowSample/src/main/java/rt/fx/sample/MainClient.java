@@ -54,7 +54,7 @@ public class MainClient extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		screenMap = ScreenLoader.getScreenMapping("rt.fx.sample");
+		screenMap = new ScreenLoader().getScreenMapping("rt.fx.sample");
 		
 		mainContainer = new FXScreenController(primaryStage);
 		mainContainer.loadScreen(screenMap);
