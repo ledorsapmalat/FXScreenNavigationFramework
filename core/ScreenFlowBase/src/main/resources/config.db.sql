@@ -11,14 +11,15 @@ id VARCHAR (50) NOT NULL ,
 owner_id VARCHAR (50) NOT NULL ,
 target_id VARCHAR (50)
 ) ;
+
 ALTER TABLE SCREEN_NAVIGATOR ADD CONSTRAINT SCREEN_NAVIGATOR_PK PRIMARY KEY ( id ) ;
 ALTER TABLE SCREEN_NAVIGATOR ADD CONSTRAINT SCREEN_NAVIGATOR_SCREEN_CONTROLLER_FK FOREIGN KEY ( owner_id ) REFERENCES SCREEN_CONTROLLER ( id ) ;
 ALTER TABLE SCREEN_NAVIGATOR ADD CONSTRAINT SCREEN_NAVIGATOR_SCREEN_CONTROLLER_FK2 FOREIGN KEY ( target_id ) REFERENCES SCREEN_CONTROLLER ( id ) ;
  
-insert into "APP"."SCREEN_CONTROLLER" ("ID", "FILE_CONTEXT") values('main', '/rt/fx/sample/mainScreen.fxml');
-insert into "APP"."SCREEN_CONTROLLER" ("ID", "FILE_CONTEXT") values('screen01', '/rt/fx/sample/nextScreen01.fxml');
-insert into "APP"."SCREEN_CONTROLLER" ("ID", "FILE_CONTEXT") values('screen02', '/rt/fx/sample/nextScreen02.fxml');
+insert into SCREEN_CONTROLLER (ID, FILE_CONTEXT) values('main', '/rt/fx/sample/mainScreen.fxml');
+insert into SCREEN_CONTROLLER (ID, FILE_CONTEXT) values('screen01', '/rt/fx/sample/nextScreen01.fxml');
+insert into SCREEN_CONTROLLER (ID, FILE_CONTEXT) values('screen02', '/rt/fx/sample/nextScreen02.fxml');
 
-insert into "APP"."SCREEN_NAVIGATOR" ("ID", "OWNER_ID", "TARGET_ID") values('btnMain', 'main', 'screen01');
-insert into "APP"."SCREEN_NAVIGATOR" ("ID", "OWNER_ID", "TARGET_ID") values('btnScreen01', 'screen01', 'screen02');
-insert into "APP"."SCREEN_NAVIGATOR" ("ID", "OWNER_ID", "TARGET_ID") values('btnScreen02', 'screen02', 'main');
+insert into SCREEN_NAVIGATOR (ID, OWNER_ID, TARGET_ID) values('btnMain', 'main', 'screen01');
+insert into SCREEN_NAVIGATOR (ID, OWNER_ID, TARGET_ID) values('btnScreen01', 'screen01', 'screen02');
+insert into SCREEN_NAVIGATOR (ID, OWNER_ID, TARGET_ID) values('btnScreen02', 'screen02', 'main');
