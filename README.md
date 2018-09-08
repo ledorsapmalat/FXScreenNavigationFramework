@@ -6,7 +6,7 @@ RT FX's Screen Navigation Framework (JavaFX)
 
 Project status
 -----------------
-Release: Beta-Version
+Release: 1.0
 
 Summary
 -----------------
