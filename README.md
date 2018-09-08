@@ -2,7 +2,7 @@ RT FX's Screen Navigation Framework (JavaFX)
 =============================================
 - Author: Rodel M. Talampas
 - Date: Sept 18, 2015
-- Version: 0.0.1-Beta
+- Version: 1.0
 
 Project status
 -----------------
