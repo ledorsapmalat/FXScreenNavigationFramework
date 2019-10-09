@@ -14,7 +14,7 @@
 
 		<final.name>ScreenFlowFramework</final.name>
 
-		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring.version>5.2.0.RELEASE</spring.version>
 		<spring.jpa.version>1.8.1.RELEASE</spring.jpa.version>
 		<junit.version>4.12</junit.version>
 		<log4j.version>2.3</log4j.version>
