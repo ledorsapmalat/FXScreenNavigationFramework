@@ -19,7 +19,7 @@
 		<junit.version>4.12</junit.version>
 		<log4j.version>2.3</log4j.version>
 		<plantuml.version>8027</plantuml.version>
-		<derby.version>10.11.1.1</derby.version>
+		<derby.version>10.14.2.0</derby.version>
 		<hibernate.entity.version>4.3.10.Final</hibernate.entity.version>
 		<persistence.api.version>1.0.2</persistence.api.version>
 		<powermock.version>1.6.2</powermock.version>
